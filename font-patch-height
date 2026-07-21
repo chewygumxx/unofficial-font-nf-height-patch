@@ -1,0 +1,92 @@
+#!/usr/bin/env python3
+# vim: expandtab:shiftwidth=4
+
+# 
+# 
+# ~/scr/font/font-patch-height
+# 
+# 
+
+import argparse
+import os
+from fontTools.ttLib import TTFont
+from fontTools.pens.recordingPen import RecordingPen
+from fontTools.pens.transformPen import TransformPen
+from fontTools.pens.ttGlyphPen   import TTGlyphPen
+
+# ----------------
+# Parse Arguments
+# ----------------
+
+parser = argparse.ArgumentParser(description="""
+    Patches nerd fonts with adjusted line height
+    while stretching TUI integral glyphs""")
+parser.add_argument('file', help="Input font filepath")
+parser.add_argument('-o', '--outfile', help="Output font filepath")
+parser.add_argument('-l', '--height-cf', help="Height coefficient",
+                    dest='height_cf', type=float, default='1')
+args = parser.parse_args()
+
+SRC = args.file
+HEIGHT_CF = args.height_cf
+
+if args.outfile is None:
+    base, ext = os.path.splitext(SRC)
+    OUT = "{0}_LH{1}{2}".format(base, str(int(HEIGHT_CF * 100)), ext)
+else:
+    OUT = args.outfile
+
+# ---------------
+# Increase Height
+# ---------------
+
+font = TTFont(SRC)
+
+hhea = font["hhea"]
+
+CENTRE = (hhea.ascent + hhea.descent) // 2
+HEIGHT_CURRENT = hhea.ascent - hhea.descent
+HEIGHT_EXTRA   = int(HEIGHT_CURRENT * (HEIGHT_CF - 1) // 2)
+
+hhea.ascent  += HEIGHT_EXTRA
+hhea.descent -= HEIGHT_EXTRA
+
+os2 = font["OS/2"]
+
+os2.sTypoAscender  += HEIGHT_EXTRA
+os2.sTypoDescender -= HEIGHT_EXTRA
+os2.usWinAscent     = max(0, os2.usWinAscent  + HEIGHT_EXTRA)
+os2.usWinDescent    = max(0, os2.usWinDescent + HEIGHT_EXTRA)
+os2.fsSelection    |= 0x80   # USE_TYPO_METRICS, probably superfluous idk
+
+# --------------------
+# Transform TUI Glyphs
+# --------------------
+
+cmap = font.getBestCmap()
+ranges = [(0x2500,0x257F),   # Box Drawing
+          (0x2580,0x259F),   # Block Elements
+          (0x2800,0x28FF),   # Braille Patterns
+          (0xE0A0,0xE0D7),   # Powerline
+          (0x1FB00,0x1FBFF), # Legacy Computing Block
+         ]
+targets = set()
+for lo,hi in ranges:
+    for cp in range(lo,hi+1):
+        if cp in cmap:
+            targets.add(cmap[cp])
+
+glyf = font["glyf"]
+for name in targets:
+    glyph = glyf[name]
+    if glyph.numberOfContours == 0:
+        continue
+
+    pen = RecordingPen()
+    tpen = TransformPen(pen, (1, 0, 0, HEIGHT_CF, 0, CENTRE * (1 - HEIGHT_CF)))
+    glyph.draw(tpen, glyf)
+    tt_pen = TTGlyphPen(glyf)
+    pen.replay(tt_pen)
+    glyf[name] = tt_pen.glyph()
+
+font.save(OUT)
