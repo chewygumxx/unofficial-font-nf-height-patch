@@ -38,7 +38,7 @@ their pixel alignment, and preventing hairline breaks in ASCII box character
 arrangement.
 
 [Nerd Fonts]: <https://github.com/ryanoasis/nerd-fonts/tree/master>
-[font-patcher]: <https://github.com/ryanoasis/nerd-fonts#font-patcher>.
+[font-patcher]: <https://github.com/ryanoasis/nerd-fonts#font-patcher>
 ['Anonymice Pro Nerd Font']: <https://github.com/ryanoasis/nerd-fonts/tree/master/patched-fonts/AnonymousPro>
 
 ## Problem: Anonymous Pro + Nerd Fonts 
