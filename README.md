@@ -18,7 +18,7 @@ fame, please consult the [font-patcher][] section of the official Nerd Font
 README.
 
 [Nerd Fonts]: <https://github.com/ryanoasis/nerd-fonts/tree/master>
-[font-patcher]: <https://github.com/ryanoasis/nerd-fonts#font-patcher>.
+[font-patcher]: <https://github.com/ryanoasis/nerd-fonts#font-patcher>
 ['Anonymice Pro Nerd Font']: <https://github.com/ryanoasis/nerd-fonts/tree/master/patched-fonts/AnonymousPro>
 
 ## Problem: Anonymous Pro + Nerd Fonts 
