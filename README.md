@@ -10,7 +10,7 @@ fame, please consult the [font-patcher][] section of the official Nerd Font
 README.
 
 > [!NOTE]
-> I am neither a contributer nor sanctioned associate of the renowned
+> I am neither contributer nor sanctioned associate of the renowned
 > [Nerd Fonts][] project.
 
 ## Abstract
