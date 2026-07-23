@@ -68,16 +68,18 @@ function gen_patches () {
         mkdir -p "$fdest_dir"
     fi
 
-    for line_height in {100..150..5}; do
+    for line_height in {105..150..5}; do
         fdest_file="${font:t:r}_LH${line_height}.${font:t:e}"
 
         (( VERBOSE >= 2 )) && encourage_msg "$fdest_file"
+        
+        height_cf=$(( line_height / 100 ))
 
-        "$HEIGHT_PATCH_BIN" -l $(( line_height / 100 )) -o "$fdest_dir/$fdest_file" "${font}"
+        "$HEIGHT_PATCH_BIN" -l ${height_bf} -o "$fdest_dir/$fdest_file" "${font}"
 
         height_patch_exit=$?
         if (( height_patch_exit != 0 )); then 
-            print "$HEIGHT_PATCH_BIN" "-l $(( line_height / 100 )) -o" "$fdest_dir/$fdest_file" "${font}" 
+            print "$HEIGHT_PATCH_BIN" "-l ${height_bf} -o" "$fdest_dir/$fdest_file" "${font}" 
             print -u2 "${0}: '$HEIGHT_PATCH_BIN' failed returning an exit code of $height_patch_exit"
             exit $height_patch_exit
         fi
