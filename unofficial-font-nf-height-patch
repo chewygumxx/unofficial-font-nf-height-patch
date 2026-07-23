@@ -9,10 +9,6 @@
 
 import argparse
 import os
-from fontTools.ttLib import TTFont
-from fontTools.pens.recordingPen import RecordingPen
-from fontTools.pens.transformPen import TransformPen
-from fontTools.pens.ttGlyphPen   import TTGlyphPen
 
 # ----------------
 # Parse Arguments
@@ -20,10 +16,11 @@ from fontTools.pens.ttGlyphPen   import TTGlyphPen
 
 parser = argparse.ArgumentParser(description="""
     Patches nerd fonts with adjusted line height
-    while stretching TUI integral glyphs""")
-parser.add_argument('file', help="Input font filepath")
-parser.add_argument('-o', '--outfile', help="Output font filepath")
-parser.add_argument('-l', '--height-cf', help="Height coefficient",
+    and vertically stretches TUI glyphs in turn ^-^
+""")
+parser.add_argument('file',              help="Input  font filepath")
+parser.add_argument('-o', '--outfile',   help="Output font filepath")
+parser.add_argument('-h', '--height-cf', help="Height coefficient",
                     dest='height_cf', type=float, default='1')
 args = parser.parse_args()
 
@@ -39,6 +36,11 @@ else:
 # ---------------
 # Increase Height
 # ---------------
+
+from fontTools.ttLib import TTFont
+from fontTools.pens.recordingPen import RecordingPen
+from fontTools.pens.transformPen import TransformPen
+from fontTools.pens.ttGlyphPen   import TTGlyphPen
 
 font = TTFont(SRC)
 
