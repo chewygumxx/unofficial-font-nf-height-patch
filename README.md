@@ -16,7 +16,7 @@ README.
 ## Abstract
 
 This repository provides a python script for uniform height manipulation of
-font glyph bounding boxes. The script is speciali sed for Nerd Font patched
+font glyph bounding boxes. The script is specialised for Nerd Font patched
 files for fine-tuned height adjustment performed distortion-free upon most
 glyphs. TUI rendering glyphs ***are*** vertically interpolated to address
 hairline breaks of box drawing, specified per the Unicode ranges below:
@@ -57,10 +57,10 @@ exhaustion was apparent.
 
 There are many ephemerally efficacious fixes for line height congestion. The
 most efficient involving compulsion of the system to surrender to the symptom,
-to increase line height style values for every application can bend, until the
-temporary fix becomes permanent solution and any unfeasible to feign fealty for
-the font so fickle, farewelled and forbidden from this Leaning Limping Letter
-Leper Village.
+to increase line height style values for every application that can bend, until
+the temporary fix becomes permanent solution and any unfeasible to feign fealty
+for the font so fickle, farewelled and forbidden from this Limping Letter Leper
+Village.
 
 ## The Provided 'Solution'
 
