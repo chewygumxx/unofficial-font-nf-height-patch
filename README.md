@@ -70,4 +70,6 @@ projected line height of any provided file is resolved exclusively from the
 difference between `hhea.ascent` and `hhea.descent`.
 
 
-`------=====------ I'll finish this in morning, script works ------=====------`
+`------=====------ I'll finish this later, the script works. ------=====------`
+
+`------=====----- Please exercise care, I may have been lucky ------=====------`
