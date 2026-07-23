@@ -46,7 +46,7 @@ font = TTFont(SRC)
 
 hhea = font["hhea"]
 
-CENTRE = (hhea.ascent + hhea.descent) // 2
+CENTER = (hhea.ascent + hhea.descent) // 2
 HEIGHT_CURRENT = hhea.ascent - hhea.descent
 HEIGHT_EXTRA   = int(HEIGHT_CURRENT * (HEIGHT_CF - 1) // 2)
 
@@ -86,7 +86,7 @@ for name in targets:
 
     # Gave up and vibe coded
     pen = RecordingPen()
-    tpen = TransformPen(pen, (1, 0, 0, HEIGHT_CF, 0, CENTRE * (1 - HEIGHT_CF)))
+    tpen = TransformPen(pen, (1, 0, 0, HEIGHT_CF, 0, CENTER * (1 - HEIGHT_CF)))
     glyph.draw(tpen, glyf)
     tt_pen = TTGlyphPen(glyf)
     pen.replay(tt_pen)
