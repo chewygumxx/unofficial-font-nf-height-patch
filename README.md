@@ -15,11 +15,11 @@ README.
 
 ## Abstract
 
-This repository contains a python script for uniform height manipulation of
-font glyph bounding boxes. The python script is specialised for Nerd Font
-files for the sake of glyph box height modifiction, without distortion of
-contained glyphs, with the exception of glyphs involved in TUI display and
-rendering. Glyphes that render TUI interfacing, including:
+This repository provides a python script for uniform height manipulation of
+font glyph bounding boxes. The script is speciali sed for Nerd Font patched
+files for fine-tuned height adjustment performed distortion-free upon most
+glyphs. TUI rendering glyphs ***are*** vertically interpolated to address
+hairline breaks of box drawing, specified per the Unicode ranges below:
 
 ```python3
 # Lines 67 to 72
@@ -32,17 +32,14 @@ ranges = [(0x2500,0x257F),   # Box Drawing
 
 ```
 
-Are instead uniformly stretched in lockstep with their bounds, preserving
-their pixel alignment, and preventing hairline breaks in ASCII box character
-arrangement.
-
 [Nerd Fonts]: <https://github.com/ryanoasis/nerd-fonts/tree/master>
 [font-patcher]: <https://github.com/ryanoasis/nerd-fonts#font-patcher>
 ['Anonymice Pro Nerd Font']: <https://github.com/ryanoasis/nerd-fonts/tree/master/patched-fonts/AnonymousPro>
 
 ## Dependencies
 
-
+- python3
+- python-fonttools
 
 ## Problem: Anonymous Pro + Nerd Fonts 
 
