@@ -11,7 +11,7 @@ README.
 
 > [!NOTE]
 > I am neither a contributer nor sanctioned associate of the renowned
-> [Nerd Font][] project.
+> [Nerd Fonts][] project.
 
 ## Abstract
 
