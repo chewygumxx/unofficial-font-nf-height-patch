@@ -20,7 +20,7 @@ parser = argparse.ArgumentParser(description="""
 """)
 parser.add_argument('file',              help="Input  font filepath")
 parser.add_argument('-o', '--outfile',   help="Output font filepath")
-parser.add_argument('-h', '--height-cf', help="Height coefficient",
+parser.add_argument('-l', '--lheight-cf', help="Height coefficient",
                     dest='height_cf', type=float, default='1')
 args = parser.parse_args()
 

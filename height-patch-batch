@@ -18,13 +18,7 @@ DEST_DIR="./height-patch-batch"
 
 # Variants share subdirectory, set empty to disable
 FONT_SUBDIR=1 
-
 VERBOSE=1
-
-RANGE_BEG=1.05
-RANGE_END=1.5
-RANGE_INC=0.05
-
 HEIGHT_PATCH_BIN="./unofficial-font-nf-height-patch"
 # ----------------------------------------------------
 
@@ -69,17 +63,24 @@ function gen_patches () {
     (( VERBOSE >= 1 )) && encourage_msg "${font:t:r}"
 
     fdest_dir="${DEST_DIR}${FONT_SUBDIR:+"/${font:t:r}"}"
-    if [[ -d "$fdest_dir" ]]; then
+    if [[ ! -d "$fdest_dir" ]]; then
         (( VERBOSE >= 2 )) && print "Creating directory: $fdest_dir"
         mkdir -p "$fdest_dir"
     fi
 
-    for line_height in {$RANGE_BEG..$RANGE_END..$RANGE_INC}; do
-        fdest_file="${font:t:r}_LH$(( line_height * 100)).${font:t:e}"
+    for line_height in {100..150..5}; do
+        fdest_file="${font:t:r}_LH${line_height}.${font:t:e}"
 
         (( VERBOSE >= 2 )) && encourage_msg "$fdest_file"
 
-        "$HEIGHT_PATCH_BIN" -l $line_height -o "$fdest_dir/$fdest_file" "${font}"
+        "$HEIGHT_PATCH_BIN" -l $(( line_height / 100 )) -o "$fdest_dir/$fdest_file" "${font}"
+
+        height_patch_exit=$?
+        if (( height_patch_exit != 0 )); then 
+            print "$HEIGHT_PATCH_BIN" "-l $(( line_height / 100 )) -o" "$fdest_dir/$fdest_file" "${font}" 
+            print -u2 "${0}: '$HEIGHT_PATCH_BIN' failed returning an exit code of $height_patch_exit"
+            exit $height_patch_exit
+        fi
     done
 }
 
@@ -87,7 +88,6 @@ for font in $font_list; do
     gen_patches "$font"
 done
 
-print "%20s %-3s\n" \
+print -f "%20s %-3s\n" \
     "Sourced Files:"     "${#font_list}" \
-    "Generated Patches:" \
-    "${$(( ${#font_list} * ( RANGE_END - RANGE_BEG ) / RANGE_INC )):r}"
+    "Generated Patches:" "$(( ${#font_list} * 10 ))"
