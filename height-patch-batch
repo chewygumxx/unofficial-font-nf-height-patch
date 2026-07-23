@@ -1,0 +1,93 @@
+#!/usr/bin/env zsh
+# vim: expandtab:shiftwidth=4
+
+# 
+# 
+# https://github.com/chewygumxx/unofficial-font-nf-height-patch/height-patch-batch
+# 
+#
+
+#
+# Batch Script for unofficial-font-nf-height-patch
+# Grants  「+3 Hope」 to never patch a Nerd Font again
+#
+
+# ** Configuration ** -------------------------------
+SOURCE_DIR="./ttf"
+DEST_DIR="./height-patch-batch"
+
+# Variants share subdirectory, set empty to disable
+FONT_SUBDIR=1 
+
+VERBOSE=1
+
+RANGE_BEG=1.05
+RANGE_END=1.5
+RANGE_INC=0.05
+
+HEIGHT_PATCH_BIN="./unofficial-font-nf-height-patch"
+# ----------------------------------------------------
+
+# ** Variable Preparation ** -------------------------
+# Empty variable protection
+: ${DEST_DIR:="."}
+: ${SOURCE_DIR:="."}
+
+encourage=(  # String length: 11-14
+    "Praising the"   "Introducing"   "Marveling at"   "Encouraging"
+    "Welcoming the"  "Warm Welcome"  "Rejoicing with" "Appreciating"
+    "Befriending"    "Excited for"   "Delighted at"   "Listening to"
+    "Honoring the"   "Complimenting" "Empathizing"    "Relaxing with"
+    "Embracing the"  "Cheering for"  "Sympathizing"   "Celebrating"
+    "Congratulating" "Admiring the"  "Entertaining"
+)
+function encourage_msg () {
+    print -f "%-14s %s\n" \
+        "${encourage[RANDOM % ${#encourage} + 1]}:" \
+        "${1:-"${0}: No message? :("}"
+}
+
+setopt local_options
+setopt no_glob_dots   # Exclude Hidden Files
+setopt no_nomatch     # Glob (N)
+
+font_list=( ${SOURCE_DIR}/*(.N:a) )
+# ----------------------------------------------------
+
+if [[ ! -e "$HEIGHT_PATCH_BIN" ]]; then
+    print -u2 "${0}: Unable to resolve height patch file HEIGHT_PATCH_BIN='$HEIGHT_PATCH_BIN'"
+    exit 127
+fi 
+
+if [[ ! -x "$HEIGHT_PATCH_BIN" ]]; then
+    print -u2 "${0}: Height patcher is not executable HEIGHT_PATCH_BIN='$HEIGHT_PATCH_BIN'"
+    exit 127
+fi
+
+function gen_patches () {
+    font="$1"
+    (( VERBOSE >= 1 )) && encourage_msg "${font:t:r}"
+
+    fdest_dir="${DEST_DIR}${FONT_SUBDIR:+"/${font:t:r}"}"
+    if [[ -d "$fdest_dir" ]]; then
+        (( VERBOSE >= 2 )) && print "Creating directory: $fdest_dir"
+        mkdir -p "$fdest_dir"
+    fi
+
+    for line_height in {$RANGE_BEG..$RANGE_END..$RANGE_INC}; do
+        fdest_file="${font:t:r}_LH$(( line_height * 100)).${font:t:e}"
+
+        (( VERBOSE >= 2 )) && encourage_msg "$fdest_file"
+
+        "$HEIGHT_PATCH_BIN" -l $line_height -o "$fdest_dir/$fdest_file" "${font}"
+    done
+}
+
+for font in $font_list; do
+    gen_patches "$font"
+done
+
+print "%20s %-3s\n" \
+    "Sourced Files:"     "${#font_list}" \
+    "Generated Patches:" \
+    "${$(( ${#font_list} * ( RANGE_END - RANGE_BEG ) / RANGE_INC )):r}"
