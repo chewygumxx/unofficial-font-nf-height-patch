@@ -6,8 +6,8 @@
 If you've found this repository and are seeking the utility for patching
 regular font files to produce new amalgamated files composed of the original
 input font plus the additional spectacular glyphs of Nerd Font compilation
-fame, please consult the [font-patcher][] section of the official Nerd Font
-README.
+fame, please consult the **[font-patcher][]** section of the official Nerd
+Font README.
 
 > [!NOTE]
 > I am neither contributer nor sanctioned associate of the renowned
