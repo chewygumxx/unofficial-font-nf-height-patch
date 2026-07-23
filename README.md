@@ -50,32 +50,24 @@ Nerd Fonts are not new. They've been communally embraced and adopted as
 terminal necessity for many welcome years. Recently however, I accidentally
 misconfigured my font precedence, elevated `Anonymice Pro Nerd Font` above
 `Anonymous Pro`, and [compromised my reading experience][gh-squeeze-issue].
-The effect was so subtle, I could not tell it had happened until my rate of
-reading exhaustion followed a pattern.
+The effect was so subtle, I had not realised until my rate of reading
+exhaustion was apparent.
 
 [gh-squeeze-issue]: <https://github.com/ryanoasis/nerd-fonts/issues/850>
 
-There are many proposed, ephemerally efficacious fixes for glyph line_height
-congestion. The easiest involve compromising the system to address the symptom,
-to increase line_height within every application that allows, until the new
-normal is status quo and whatever cannot compensate for a broken font is
-forbidden from Limping Letter Land.
+There are many ephemerally efficacious fixes for line height congestion. The
+most efficient involving compulsion of the system to surrender to the symptom,
+to increase line height style values for every application can bend, until the
+temporary fix becomes permanent solution and any unfeasible to feign fealty for
+the font so fickle, farewelled and forbidden from this Leaning Limping Letter
+Leper Village.
 
-## The Provided Solution
+## The Provided 'Solution'
 
-The `font-patch-height-nf-unofficial` script does not manipulate the line height
-of `head`, `hhea`, `OS/2`, `cmap`, `glyf` nor any other given table due to
-the alien nature of Window's glyph handling idiosyncranicity. The font
-line-height is resolved solely from the difference between `hhea.ascent` and
-`hhea.descent`, the
+The `font-patch-height-nf-unofficial` script does not manipulate the dedicated 
+line height properties of tables `head`, `hhea`, `OS/2`, nor any other. The 
+projected line height of any provided file is resolved exclusively from the 
+difference between `hhea.ascent` and `hhea.descent`.
 
 
 `------=====------ I'll finish this in morning, script works ------=====------`
-
-The 
-script involved more glyph study than my working memory permit.
-
-The aforementioned lassitude trap is one I sympathise given this python
-involves more line-reading than script-play performance. It's executed without
-issue, produces  the few orms without needlessly difficult compared to increasing line_height. The final straw was
-needlessly difficult compared to increasing line_height. The final straw was
