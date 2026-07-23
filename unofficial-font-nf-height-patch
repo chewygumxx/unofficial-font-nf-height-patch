@@ -84,6 +84,7 @@ for name in targets:
     if glyph.numberOfContours == 0:
         continue
 
+    # Gave up and vibe coded
     pen = RecordingPen()
     tpen = TransformPen(pen, (1, 0, 0, HEIGHT_CF, 0, CENTRE * (1 - HEIGHT_CF)))
     glyph.draw(tpen, glyf)
