@@ -64,7 +64,7 @@ Leper Village.
 
 ## The Provided 'Solution'
 
-The `font-patch-height-nf-unofficial` script does not manipulate the dedicated 
+The `unofficial-font-nf-height-patch` script does not manipulate the dedicated 
 line height properties of tables `head`, `hhea`, `OS/2`, nor any other. The 
 projected line height of any provided file is resolved exclusively from the 
 difference between `hhea.ascent` and `hhea.descent`.
