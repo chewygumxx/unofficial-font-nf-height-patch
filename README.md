@@ -1,20 +1,21 @@
-# Nerd Font Height Patch \[Unofficial]
+# Nerd Font Height Patch
+
+> You may be searching for the esteemed Nerd Font Repository: 
+> **[ryanoasis/nerd-fonts][Nerd Fonts]**
+
 > [!NOTE]
 > I am neither a contributer nor sanctioned associate of the renowned
 > [Nerd Font][] project.
 > 
 > Apparently some repository names are reserved :)
 
-## Directions to [Nerd Fonts][]
-
-The esteemed Nerd Font Repository awarded :star: *>63k Stars* :star:: 
-**[ryanoasis/nerd-fonts][Nerd Fonts]**
-
 If you've found this repository and are seeking the utility for patching
 regular font files to produce new amalgamated files composed of the original
 input font plus the additional spectacular glyphs of Nerd Font compilation
 fame, please consult the [font-patcher][] section of the official Nerd Font
 README.
+
+## Abstract
 
 This repository contains a python script for uniform height manipulation of
 font glyph bounding boxes. The python script is specialised for Nerd Font
@@ -40,6 +41,10 @@ arrangement.
 [Nerd Fonts]: <https://github.com/ryanoasis/nerd-fonts/tree/master>
 [font-patcher]: <https://github.com/ryanoasis/nerd-fonts#font-patcher>
 ['Anonymice Pro Nerd Font']: <https://github.com/ryanoasis/nerd-fonts/tree/master/patched-fonts/AnonymousPro>
+
+## Dependencies
+
+
 
 ## Problem: Anonymous Pro + Nerd Fonts 
 
